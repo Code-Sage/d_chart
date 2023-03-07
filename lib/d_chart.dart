@@ -1041,6 +1041,7 @@ class DChartBarCustom extends StatefulWidget {
     this.spaceDomainLinetoChart,
     this.spaceMeasureLinetoChart,
     this.domainLabelAlignVertical,
+    this.barWidth,
   }) : super(key: key);
 
   /// Limit top value for value chart, beside top domainAxis Line
@@ -1146,6 +1147,8 @@ class DChartBarCustom extends StatefulWidget {
 
   /// default: CrossAxisAlignment.end
   final CrossAxisAlignment? domainLabelAlignVertical;
+
+  final double? barWidth;
 
   @override
   State<DChartBarCustom> createState() => _DChartBarCustomState();
@@ -1288,8 +1291,9 @@ class _DChartBarCustomState extends State<DChartBarCustom> {
                               DChartBarDataCustom item = widget.listData[index];
 
                               return SizedBox(
-                                width: (item.value / max) *
-                                    constraintsChart.maxWidth,
+                                width: widget.barWidth ??
+                                    ((item.value / max) *
+                                        constraintsChart.maxWidth),
                                 height: (constraintsChart.maxHeight /
                                         widget.listData.length) -
                                     (widget.spaceBetweenItem ??
